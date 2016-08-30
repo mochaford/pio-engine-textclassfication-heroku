@@ -11,11 +11,17 @@ import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.UserDefinedFunction
+//import org.apache.spark.sql.expressions.UserDefinedFunction
 
 import grizzled.slf4j.Logger
 
-case class LRAlgorithmParams(regParam: Double) extends Params
+//case class LRAlgorithmParams(regParam: Double) extends Params
 
+
+case class LRAlgorithmParams(nGram: Integer, numFeatures: Integer, SPPMI : Boolean,regParam: Double) extends Params
+// "nGram": 1,
+//"numFeatures": 500,
+//"SPPMI": false
 class LRAlgorithm(val ap: LRAlgorithmParams)
   extends P2LAlgorithm[PreparedData, LRModel, Query, PredictedResult] {
 
@@ -55,6 +61,7 @@ class LRAlgorithm(val ap: LRAlgorithmParams)
 
         // Return (label, feature coefficients, and intercept term.
         (label, LREstimate(fit.weights.toArray, fit.intercept))
+        //(label, LREstimate(fit.coefficients.toArray, fit.intercept))
 
       }
     )
