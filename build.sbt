@@ -1,5 +1,5 @@
 
-name := "org.template.textclassification"
+name := "pio-engine-textclassification"
 
 organization := "io.prediction"
 
