@@ -5,6 +5,7 @@ import io.prediction.data.storage.EngineManifest
 import io.prediction.workflow.{CreateServer, ServerConfig, WorkflowUtils}
 import spray.can.Http
 import spray.can.server.ServerSettings
+import java.util.logging.Logger
 
 object ServerApp extends App {
 
@@ -32,7 +33,7 @@ object ServerApp extends App {
       eventServerPort = eventServerPort,
       accessKey = maybeAccessKey
     )
-
+    Logger.getAnonymousLogger.info("engineInstance.engineFactory:" + engineInstance.engineFactory)
     val (engineLanguage, engineFactory) = WorkflowUtils.getEngine(engineInstance.engineFactory, getClass.getClassLoader)
     val engine = engineFactory()
 
