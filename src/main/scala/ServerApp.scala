@@ -35,6 +35,7 @@ object ServerApp extends App {
       accessKey = maybeAccessKey
     )
     Logger.getAnonymousLogger.info("engineInstance.engineFactory:" + engineInstance.engineFactory)
+    //engineInstance.engineFactory = "org.template.textclassification.TextClassificationEngine"
     val (engineLanguage, engineFactory) = WorkflowUtils.getEngine(engineInstance.engineFactory, getClass.getClassLoader)
     val engine = engineFactory()
 
