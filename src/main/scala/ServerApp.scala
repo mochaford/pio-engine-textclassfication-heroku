@@ -14,12 +14,12 @@ object ServerApp extends App {
   val eventServerPort = sys.env.getOrElse("EVENT_SERVER_PORT", "7070").toInt
   val maybeAccessKey = sys.env.get("ACCESS_KEY")
 
+
   val maybeLatestEngineInstance = CreateServer.engineInstances.getLatestCompleted(EngineConfig.engineId, EngineConfig.engineVersion, EngineConfig.engineVariantId)
 
   maybeLatestEngineInstance.map { engineInstance =>
     // the spark config needs to be set in the engineInstance
     engineInstance.copy(sparkConf = engineInstance.sparkConf.updated("spark.master", "local"))
-    engineInstance
   }.fold {
     println("Could not get latest completed engine instance")
   } { engineInstance =>
