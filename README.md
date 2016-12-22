@@ -1,36 +1,52 @@
-# Text Classification Engine
+PredictionIO Engine Heroku
+--------------------------
 
-Look at the following [tutorial](https://docs.prediction.io/demo/textclassification/) for a Quick Start guide and implementation details.
+Run Locally:
 
-# Release Information
+1. Start Postgres
+1. Set your PredictionIO app's access key and app name in your env vars:
 
-## Version 4.0
+        export ACCESS_KEY=<YOUR ACCESS KEY>
+        export APP_NAME=<YOUR APP NAME>
 
-Re-structure and design preparator and algo. less memory usage and run time is faster.
-Move BIDMach, VW & SPPMI algo changes to `bidmach` branch temporarily.
+    Note: These values come from the apps defined in your event server.
 
-## Version 3.1
+1. Train the app:
 
-Fix DataSource to read "content", "e-mail", and use label "spam" for tutorial data.
-Fix engine.json for default algorithm setting.
+        source bin/env.sh && ./sbt "runMain TrainApp"
+
+1. Start the server:
+
+        source bin/env.sh && ./sbt "runMain ServerApp"
+
+1. Check the status of your engine:
+
+    http://localhost:8000
+
+1. Check out the recommendations for an item:
+
+    > Note: Must be an item that has events
+
+        curl -H "Content-Type: application/json" -d '{ "items": ["i11"], "num": 4 }' -k http://localhost:8000/queries.json
 
 
-## Version 2.2
+Run on Heroku:
 
-Modified PreparedData to use MLLib hashing and tf-idf implementations.
+1. Deploy: [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+1. Attach your PredictionIO Event Server's Postgres:
 
-## Version 2.1
+        heroku addons:attach YOUR-ADDON-ID
 
-Fixed dot product implementation in the predict methods to work with batch predict method for evaluation.
+    Note: You can find out `<YOUR-ADDON-ID>` by running: `heroku addons -a <YOUR EVENT SERVER HEROKU APP NAME>`
 
-## Version 2.0
+1. Configure the Heroku app:
 
-Included three different data sets: e-mail spam, 20 newsgroups, and the rotten tomatoes semantic analysis set. Includes Multinomial Logistic Regression algorithm for text classification.
+        heroku config:set ACCESS_KEY=<YOUR APP ACCESS KEY> APP_NAME=<APP NAME> EVENT_SERVER_IP=<YOUR EVENT SERVER HOSTNAME> EVENT_SERVER_PORT=80
 
-## Version 1.2
+1. Train the app:
 
-Fixed import script bug occuring with Python 2.
+        heroku run train
 
-## Version 1.1 Changes
+1. Restart the app to load the new training data:
 
-Changed data import Python script to pull straight from the [20 newsgroups](http://qwone.com/~jason/20Newsgroups/) page.
+        heroku restart
