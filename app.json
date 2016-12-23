@@ -5,7 +5,7 @@
     "machinelearning",
     "predictionio"
   ],
-  "repository": "https://github.com/gongsy945/pio-engine-textclassification-heroku",
+  "repository": "https://github.com/gongsy945/pio-engine-textclassfication-heroku",
   "env": {
     "ACCESS_KEY": {
       "description": "PredictionIO Event Server App Access Key"
