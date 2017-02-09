@@ -1,5 +1,5 @@
 
-name := "pio-engine-textclassification"
+name := "accura-demo-pio"
 
 organization := "io.prediction"
 
