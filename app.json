@@ -1,5 +1,5 @@
 {
-  "name": "pio-engine-textclassification",
+  "name": "accura-demo-pio",
   "description": "Heroku compatible PredictionIO Engine",
   "keywords": [
     "machinelearning",
