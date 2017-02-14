@@ -47,7 +47,13 @@ class DataSource (
     )(sc).map(e => {
       val label : String = e.properties.get[String]("label")
       Observation(
-        if (label == "high") 2.0 else if (label == "middle") 1.0 else 0.0,
+          if (label == ">=7") 7.0
+          else if (label == "5<d<=6") 6.0
+          else if (label == "4<d<=5") 5.0 
+          else if (label == "3<d<=4") 4.0 
+          else if (label == "2<d<=3") 3.0
+          else if (label == "1<d<=2") 2.0 
+          else if (label == "<=1") 1.0,
         e.properties.get[String]("text"),
         label
       )
