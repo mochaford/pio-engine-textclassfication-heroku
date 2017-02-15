@@ -53,7 +53,7 @@ class DataSource (
           else if (label == "3<d<=4") 4.0 
           else if (label == "2<d<=3") 3.0
           else if (label == "1<d<=2") 2.0 
-          else if (label == "<=1") 1.0,
+          else if (label == "<=1") 1.0
         e.properties.get[String]("text"),
         label
       )
